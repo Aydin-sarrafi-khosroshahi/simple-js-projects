@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8" />
+    <title>To Do List </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
+    <meta content="Coderthemes" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- page favicon -->
+    <link rel="shortcut icon" href="dist/images/favicon/download.png">
+
+    <!-- bootstrap css -->
+    <link href="dist/libs/bootstrap/css/bootstrap.rtl.min.css" rel="stylesheet" type="text/css">
+
+    <!--  Custom  -->
+    <link href="dist/css/template.css" rel="stylesheet" type="text/css">
+
+    <style>
+        body {
+            height: 100vh;
+            width: 100%;
+            background-image: linear-gradient(to right, #e5ecf4, #a0c9dd);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        input,
+        button {
+            padding: 8px 16px;
+            outline: none;
+            transition: 0.2s all ease-in;
+        }
+
+        button:hover {
+            background-color: #0800ff;
+            color: #fff;
+        }
+
+        fieldset {
+            margin-bottom: 40px;
+            border: 1px solid #000;
+            padding: 20px;
+        }
+
+        input:focus,
+        input:focus-visible,
+        input:focus-within {
+            border-color: #0800ff !important;
+        }
+    </style>
+
+
+</head>
+
+<!-- body start -->
+
+<body>
+
+    <div class="container">
+        <fieldset>
+            <legend>
+                insert data
+            </legend>
+            <input type="text" id="inpKey" placeholder="Enter key ...">
+            <input type="text" id="inpVal" placeholder="Enter value ...">
+            <button type="button" id="btnInsert">Insert</button>
+        </fieldset>
+
+        <fieldset>
+            <legend>
+                Local Storage output
+            </legend>
+            <div id="isOutput"></div>
+        </fieldset>
+    </div>
+
+
+
+</body>
+
+<!-- jquery js -->
+<script src="dist/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<!-- bootstrap js -->
+<script src="dist/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- custom js -->
+<script>
+    const inpKey = $("#inpKey");
+    const inpVal = $("#inpVal");
+    const btnInsert = $("#btnInsert");
+    const isOutput = $("#isOutput");
+
+    btnInsert.click(function () {
+
+        let key = inpKey.val();
+        let value = inpVal.val();
+
+        if (key && value) {
+            localStorage.setItem(key, value);
+            window.location.reload();
+        } else {
+            alert("didnt enter one of fields");
+        }
+    });
+
+    for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        const value = localStorage.getItem(key);
+
+        isOutput.append(`${key} --- ${value} <br>`);
+    }
+</script>
+
+
+
+</html>

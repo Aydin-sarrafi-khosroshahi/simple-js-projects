@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8" />
+    <title>To Do List </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
+    <meta content="Coderthemes" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- page favicon -->
+    <link rel="shortcut icon" href="dist/images/favicon/download.png">
+
+    <!-- bootstrap css -->
+    <link href="dist/libs/bootstrap/css/bootstrap.rtl.min.css" rel="stylesheet" type="text/css">
+
+    <!--  Custom  -->
+    <link href="dist/css/template.css" rel="stylesheet" type="text/css">
+
+    <style>
+        body {
+            height: 100vh;
+            width: 100%;
+            background-color: #3ebed7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .add-task-btn {
+            background-color: #dd6aad;
+            /* width: 40px;
+            height: 40px; */
+            border-radius: 0.25rem;
+            padding: 4px 12px;
+            color: #fff;
+        }
+
+        .add-task-btn img {
+            filter: invert();
+            max-width: 20px;
+        }
+
+        .add-task-input::placeholder {
+            color: rgb(255, 230, 230);
+            font-size: 12px;
+        }
+
+        .todo-contain {
+            max-width: 500px;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        .add-task-box {
+            background-color: #00001c;
+            padding: 10px;
+            border-radius: 0.25rem;
+            margin-bottom: 100px;
+        }
+
+        .task-items {
+            background-color: #000;
+            border-radius: 0.25rem;
+            margin-bottom: 20px;
+            padding: 0 20px;
+
+        }
+
+        .del-icon {
+            display: none;
+        }
+
+        .del-icon img {
+            max-width: 16px;
+            filter: invert();
+        }
+        .todo-list{
+            display: none;
+        }
+    </style>
+
+
+</head>
+
+<!-- body start -->
+
+<body>
+
+    <div class="container">
+
+        <div class="d-flex align-items-center justify-content-center">
+            <div class="w-100 bg-white todo-contain">
+                <!-- input for task name -->
+                <div class="add-task-box d-flex align-items-center w-100 shadow">
+                    <input class="add-task-input border-0 bg-transparent w-100 outline-none text-white font-14"
+                        type="text" placeholder="add Task ... ">
+                    <button class="border-0 add-task-btn font-14">
+                        <!-- <img src="dist/images/main-page-images/plus.svg" alt=""> -->
+                        submit
+                    </button>
+                </div>
+
+
+
+
+                <ul class="m-0 p-0 allTasks">
+                    <!-- <li class="w-100 todo-list">
+                        <div class="d-flex align-items justify-content-between task-items shadow w-100">
+                            <div class="d-flex align-items-center">
+                                <input type="checkbox" class="ms-3 todo-check" id="todo-check">
+                                <p class="mb-0 text-white font-14 result-list py-3">
+                                    task 1
+                                </p>
+                            </div>
+
+                            <button class="border-0 del-icon border-0 bg-transparent">
+                                <img src="dist/images/main-page-images/trash-2.svg" alt="">
+                            </button>
+                        </div>
+                    </li> -->
+                </ul>
+
+
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+</body>
+
+<!-- jquery js -->
+<script src="dist/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<!-- bootstrap js -->
+<script src="dist/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- custom js -->
+<script>
+    $(".add-task-btn").click(function () {
+        var taskContent = $(".add-task-input").val();
+        if (taskContent) {
+            var value = taskContent;
+            localStorage.setItem(key, value);
+
+
+
+        } else {
+            alert("didnt enter any tasks");
+        }
+
+        for (let i = 0; i < localStorage.length; i++) {
+            // key
+            var key = localStorage.key(i);
+
+            // value
+            var value = localStorage.getItem(key);
+            key = 1;
+
+            $(`<li class="w-100 todo-list">
+                        <div class="d-flex align-items justify-content-between task-items shadow w-100">
+                            <div class="d-flex align-items-center">
+                                <input type="checkbox" class="ms-3 todo-check" id="todo-check">
+                                <p class="mb-0 text-white font-14 result-list py-3">
+                                    ${key}th  is   ==>     ${value}
+                                </p>
+                            </div>
+
+                            <button class="border-0 del-icon border-0 bg-transparent">
+                                <img src="dist/images/main-page-images/trash-2.svg" alt="">
+                            </button>
+                        </div>
+                    </li>`).insertBefore('.allTasks');
+            
+            $(".todo-list").show(400);
+
+        }
+
+        $("#todo-check").change(function () {
+            if ($(this).is(":checked")) {
+                $(".del-icon").show(400);
+            } else {
+                $(".del-icon").hide(400);
+            }
+        });
+
+        $(".del-icon").click(function () {
+            localStorage.removeItem(undefined);
+            $(".todo-list").hide(400);
+            console.log(localStorage);
+
+        });
+    });
+</script>
+
+
+
+</html>
