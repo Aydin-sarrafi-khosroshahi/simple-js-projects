@@ -76,9 +76,8 @@
             max-width: 16px;
             filter: invert();
         }
-        .todo-list{
-            display: none;
-        }
+
+        .todo-list {}
     </style>
 
 
@@ -142,44 +141,26 @@
 
 <!-- custom js -->
 <script>
+    let item_count = 0;
+
+    let stoage = new Map();
+
+    if (localStorage.length > 0) {
+        item_count = localStorage.length;
+    }
+
     $(".add-task-btn").click(function () {
         var taskContent = $(".add-task-input").val();
         if (taskContent) {
             var value = taskContent;
+            var key = item_count;
             localStorage.setItem(key, value);
-
-
-
+            item_count++;
+            window.location.reload();
         } else {
             alert("didnt enter any tasks");
         }
 
-        for (let i = 0; i < localStorage.length; i++) {
-            // key
-            var key = localStorage.key(i);
-
-            // value
-            var value = localStorage.getItem(key);
-            key = 1;
-
-            $(`<li class="w-100 todo-list">
-                        <div class="d-flex align-items justify-content-between task-items shadow w-100">
-                            <div class="d-flex align-items-center">
-                                <input type="checkbox" class="ms-3 todo-check" id="todo-check">
-                                <p class="mb-0 text-white font-14 result-list py-3">
-                                    ${key}th  is   ==>     ${value}
-                                </p>
-                            </div>
-
-                            <button class="border-0 del-icon border-0 bg-transparent">
-                                <img src="dist/images/main-page-images/trash-2.svg" alt="">
-                            </button>
-                        </div>
-                    </li>`).insertBefore('.allTasks');
-            
-            $(".todo-list").show(400);
-
-        }
 
         $("#todo-check").change(function () {
             if ($(this).is(":checked")) {
@@ -190,11 +171,69 @@
         });
 
         $(".del-icon").click(function () {
-            localStorage.removeItem(undefined);
-            $(".todo-list").hide(400);
-            console.log(localStorage);
-
+            localStorage.removeItem($(this).data('key'));
+            $(this).closest('li.todo-list').remove();
         });
+    });
+
+    for (let i = 0; i < localStorage.length; i++) {
+        // key
+        var key = localStorage.key(i);
+
+        // value
+        var value = localStorage.getItem(key);
+
+        stoage.set(key, value);
+    }
+
+
+    stoage = [...stoage.entries()].sort();
+
+
+    
+
+
+    stoage.forEach(function (element, key) {
+
+        $(`<li class="w-100 todo-list">
+            <div class="d-flex align-items justify-content-between task-items shadow w-100">
+                <div class="d-flex align-items-center">
+                    <input type="checkbox" class="ms-3 todo-check" id="todo-check">
+                    <p class="mb-0 text-white font-14 result-list py-3">
+                        ${parseInt(key) + 1}th  is   ==>     ${element[1]}
+                    </p>
+                </div>
+
+                <button class="border-0 del-icon border-0 bg-transparent" data-key="${key}">
+                    <img src="dist/images/main-page-images/trash-2.svg" alt="">
+                </button>
+            </div>
+        </li>`).insertBefore('.allTasks');
+
+    });
+
+
+
+
+    $(".todo-check").change(function () {
+        if ($(this).is(":checked")) {
+            $(this).closest('li.todo-list').find(".del-icon").show(400);
+        } else {
+            $(this).closest('li.todo-list').find(".del-icon").hide(400);
+        }
+    });
+
+
+    $(".del-icon").click(function () {
+        localStorage.removeItem($(this).data('key'));
+        console.log(key);
+        
+        $(this).closest('li.todo-list').hide('slow', function(){ $(this).closest('li.todo-list').remove($(this).data('key')); });
+
+        setTimeout(()=>{
+            window.location.reload();
+        } , 500);
+        
     });
 </script>
 
