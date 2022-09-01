@@ -76,8 +76,10 @@
             max-width: 16px;
             filter: invert();
         }
+        .todo-list{
+            display: none;
+        }
 
-        .todo-list {}
     </style>
 
 
@@ -105,20 +107,6 @@
 
 
                 <ul class="m-0 p-0 allTasks">
-                    <!-- <li class="w-100 todo-list">
-                        <div class="d-flex align-items justify-content-between task-items shadow w-100">
-                            <div class="d-flex align-items-center">
-                                <input type="checkbox" class="ms-3 todo-check" id="todo-check">
-                                <p class="mb-0 text-white font-14 result-list py-3">
-                                    task 1
-                                </p>
-                            </div>
-
-                            <button class="border-0 del-icon border-0 bg-transparent">
-                                <img src="dist/images/main-page-images/trash-2.svg" alt="">
-                            </button>
-                        </div>
-                    </li> -->
                 </ul>
 
 
@@ -148,7 +136,7 @@
     if (localStorage.length > 0) {
         item_count = localStorage.length;
     }
-
+    console.log(localStorage)
     $(".add-task-btn").click(function () {
         var taskContent = $(".add-task-input").val();
         if (taskContent) {
@@ -156,23 +144,30 @@
             var key = item_count;
             localStorage.setItem(key, value);
             item_count++;
-            window.location.reload();
+            setTimeout(() => {
+                window.location.reload();
+            }, 100);
         } else {
             alert("didnt enter any tasks");
         }
 
-
-        $("#todo-check").change(function () {
+        $(".todo-check").change(function () {
             if ($(this).is(":checked")) {
-                $(".del-icon").show(400);
+                $(this).closest('li.todo-list').find(".del-icon").show(400);
             } else {
-                $(".del-icon").hide(400);
+                $(this).closest('li.todo-list').find(".del-icon").hide(400);
             }
         });
 
         $(".del-icon").click(function () {
             localStorage.removeItem($(this).data('key'));
-            $(this).closest('li.todo-list').remove();
+
+            $(this).closest('li.todo-list').hide('slow', function () {
+                $(this).closest('li.todo-list').remove($(this).data('key'));
+            });
+
+
+
         });
     });
 
@@ -190,25 +185,17 @@
     stoage = [...stoage.entries()].sort();
 
 
-    
+
 
 
     stoage.forEach(function (element, key) {
 
-        $(`<li class="w-100 todo-list">
-            <div class="d-flex align-items justify-content-between task-items shadow w-100">
-                <div class="d-flex align-items-center">
-                    <input type="checkbox" class="ms-3 todo-check" id="todo-check">
-                    <p class="mb-0 text-white font-14 result-list py-3">
-                        ${parseInt(key) + 1}th  is   ==>     ${element[1]}
-                    </p>
-                </div>
 
-                <button class="border-0 del-icon border-0 bg-transparent" data-key="${key}">
-                    <img src="dist/images/main-page-images/trash-2.svg" alt="">
-                </button>
-            </div>
-        </li>`).insertBefore('.allTasks');
+        $(".allTasks").append(
+            `<li class="w-100 todo-list"><div class="d-flex align-items justify-content-between task-items shadow w-100"><div class="d-flex align-items-center"><input type="checkbox" class="ms-3 todo-check" id="todo-check"><p class="mb-0 text-white font-14 result-list py-3">${parseInt(key) + 1}th  is   ==>     ${element[1]}</p></div><button class="border-0 del-icon border-0 bg-transparent" data-key="${element[0]}"><img src="dist/images/main-page-images/trash-2.svg" alt=""></button></div></li>`
+            );
+
+            $('.allTasks li:last').show('slow');
 
     });
 
@@ -226,14 +213,10 @@
 
     $(".del-icon").click(function () {
         localStorage.removeItem($(this).data('key'));
-        console.log(key);
-        
-        $(this).closest('li.todo-list').hide('slow', function(){ $(this).closest('li.todo-list').remove($(this).data('key')); });
 
-        setTimeout(()=>{
-            window.location.reload();
-        } , 500);
-        
+        $(this).closest('li.todo-list').hide('slow', function () {
+            $(this).closest('li.todo-list').remove($(this).data('key'));
+        });
     });
 </script>
 

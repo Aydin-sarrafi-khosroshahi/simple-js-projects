@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8" />
+    <title>test </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
+    <meta content="Coderthemes" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- page favicon -->
+    <link rel="shortcut icon" href="dist/images/favicon/download.png">
+
+    <!-- bootstrap css -->
+    <link href="dist/libs/bootstrap/css/bootstrap.rtl.min.css" rel="stylesheet" type="text/css">
+
+    <!--  Custom  -->
+    <link href="dist/css/template.css" rel="stylesheet" type="text/css">
+
+
+
+
+</head>
+
+<!-- body start -->
+
+<body>
+
+
+    <div class="container">
+        <ul class="list d-flex">
+            <li class="item">a</li>
+            <li class="item">b</li>
+            <li class="item">c</li>
+            <li class="item">d</li>
+        </ul>
+        <button class="btn">
+            click me !
+        </button>
+    </div>
+
+
+</body>
+
+<!-- jquery js -->
+<script src="dist/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<!-- bootstrap js -->
+<script src="dist/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- custom js -->
+<script>
+    $(".btn").click(function(){
+        
+        $(`<li class="item">f</li>`).slideUp(function () {
+            $(this).insertAfter("li:last").slideDown();
+        });
+
+
+
+    })
+</script>
+
+
+</html>
