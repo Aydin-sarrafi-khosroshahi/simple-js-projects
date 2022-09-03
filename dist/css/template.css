@@ -186,6 +186,123 @@ p{
 .dir-rtl{
 	direction: rtl;
 }
-/* color flipper styling !!!!!!!!!!!!!!!!!!!!! */
+/* add to card styling styling !!!!!!!!!!!!!!!!!!!!! */
+.topHeader{
+	margin-bottom: 80px;
+	margin-top: 20px;
+}
+.topHeader::after{
+	content: '';
+	position: absolute;
+	width: 300px;
+	height: 4px;
+	background-color: #05adf0;
+	bottom: -20px;
+	left: 0;
+	border-radius: 5px;
+}
+.topHeader::before{
+	content: '';
+	position: absolute;
+	width: 150px;
+	height: 4px;
+	background-color: #1e00ff;
+	bottom: -20px;
+	left: 0;
+	z-index: 1;
+	border-radius: 5px;
+}
+.productsImg{
+	height: 240px;
+}
+.productsImg img{
+	max-width: 100%;
+	height: 100%;
+}
+.addBtn{
+	background-image: linear-gradient(to right , #1e00ff ,  #05adf0);
+	transition: 0.3s all ease;
+}
+.addBtn:hover{
+	box-shadow: 0 0.1rem 0.5rem #1e00ff!important;
+}
+.products{
+	transition: 0.3s all ease;
+}
+.products:hover{
+	transform: scale(1.1);
+}
+
+.addModal{
+	width: 100%;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.7);
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+	display: none;
+}
+.productDetail img{
+	max-width: 100%;
+	width: 100%;
+	height: 100%;
+}
+.modalMaxWidth{
+	max-width: 650px;
+	z-index: 1000;
+}
+.addOrLess span{
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #1e00ff;
+	font-size: 18px;
+	margin: 0 5px;
+	color: #fff;
+	font-weight: 600;
+	cursor: pointer;
+	box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+}
+.closeBtn{
+	position: absolute;
+	top: 8px;
+	right: 8px;
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: 0.3s all ease;
+	background-color: #1e00ff!important;
+
+}
+.closeBtn img{
+	max-width: 20px;
+	filter: invert();
+}
+.closeBtn:hover{
+	background-color: #05adf0!important;
+}
+.lastAdd img{
+	max-width: 16px;
+	filter: invert();
+}
+.lastAdd{
+	background-image: linear-gradient(to right , #1e00ff ,  #05adf0);
+	transition: 0.3s all ease;
+	width: 170px;
+}
+.lastAdd:hover{
+	box-shadow: 0 0.1rem 0.5rem #1e00ff!important;
+}
 
 
+.a{
+	margin: 400px 0;
+}
