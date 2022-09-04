@@ -229,8 +229,11 @@ p{
 .products{
 	transition: 0.3s all ease;
 }
-.products:hover{
+.products:hover.products img{
 	transform: scale(1.1);
+}
+.products img{
+	transition: 0.3s all ease;
 }
 
 .addModal{
@@ -242,7 +245,6 @@ p{
     left: 0;
     top: 0;
     bottom: 0;
-	display: none;
 }
 .productDetail img{
 	max-width: 100%;
