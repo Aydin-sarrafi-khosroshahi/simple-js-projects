@@ -245,6 +245,7 @@ p{
     left: 0;
     top: 0;
     bottom: 0;
+	display: none;
 }
 .productDetail img{
 	max-width: 100%;
