@@ -72,7 +72,6 @@ $(`[data-car]`).click(function () {
                 'number' : productCount
             };
             localStorage.setItem(carName , JSON.stringify(aboutCar));
-            console.log(localStorage);
         }
 
 
